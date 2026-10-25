@@ -288,7 +288,7 @@
         mediaBox.innerHTML = isVertical
             ? `<div class="vertical-media-wrapper"><div class="vertical-phone-frame">${iframe}</div></div>`
             : iframe;
-        modalExt.innerHTML = `<a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer" class="modal-ext-btn"><span>Regarder en 1080p/4K sur YouTube ↗</span></a>`;
+        modalExt.innerHTML = `<a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer" class="modal-ext-btn"><span>Visionner sur YouTube ↗</span></a>`;
     }
 
     function renderCollection(d) {
@@ -451,10 +451,57 @@
     /* Tant que l'identifiant Formspree n'est pas renseigné dans index.html, on évite un envoi dans le vide */
     const form = $('#contact-form');
     const formStatus = $('#form-status');
-    form.addEventListener('submit', (e) => {
-        if (form.action.includes('VOTRE_ID_FORMSPREE_ICI')) {
+
+    if (form) {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            formStatus.textContent = "Le formulaire n'est pas encore actif. Écris-moi directement par email, merci !";
-        }
-    });
+
+            // Sécurité : Si l'ID n'est pas encore configuré dans index.html
+            if (form.action.includes('VOTRE_ID_FORMSPREE_ICI')) {
+                formStatus.textContent = "Le formulaire n'est pas encore actif. Écris-moi directement par email !";
+                formStatus.style.color = '#f87171';
+                return;
+            }
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn ? submitBtn.textContent : 'Envoyer';
+
+            // État pendant l'envoi
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Envoi en cours...';
+            }
+            formStatus.textContent = '';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    formStatus.textContent = "Message envoyé avec succès ! Je te réponds au plus vite.";
+                    formStatus.style.color = '#4ade80'; // Vert
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    if (data && data.errors) {
+                        formStatus.textContent = data.errors.map((err) => err.message).join(', ');
+                    } else {
+                        formStatus.textContent = "Une erreur est survenue. Réessaie ou écris-moi par mail.";
+                    }
+                    formStatus.style.color = '#f87171'; // Rouge
+                }
+            } catch (err) {
+                formStatus.textContent = "Erreur de connexion. Vérifie ta connexion et réessaie.";
+                formStatus.style.color = '#f87171';
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                }
+            }
+        });
+    }
 })();
