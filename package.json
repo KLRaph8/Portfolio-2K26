@@ -1,0 +1,23 @@
+{
+  "name": "portfolio2k26",
+  "version": "1.0.0",
+  "description": "Portfolio de Raphaël Klur - Réalisation audiovisuelle, Motion Design et VFX",
+  "scripts": {
+    "dev": "echo \"This is a static site - open index.html in a browser\"",
+    "test": "echo \"No tests specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KLRaph8/Portfolio-2K26.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KLRaph8/Portfolio-2K26/issues"
+  },
+  "homepage": "https://github.com/KLRaph8/Portfolio-2K26#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
