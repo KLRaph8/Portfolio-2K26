@@ -98,7 +98,6 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    
                     <span class="card-action">${footLabel}</span>
                 </div>
             </article>`;
@@ -140,7 +139,6 @@
     const dividers = $$('.grid-category-divider', grid);
 
     /* ===== 3. APPARITIONS AU SCROLL ===== */
-    /* Le délai d'apparition (--delay) est retiré une fois l'animation finie, pour que le survol reste instantané */
     const clearDelayLater = (el) => setTimeout(() => el.style.removeProperty('--delay'), 1500);
 
     const revealObserver = new IntersectionObserver((entries, obs) => {
@@ -154,7 +152,6 @@
 
     $$('.js-reveal-up, .js-reveal-box, .js-line-reveal, .project-card').forEach((el) => revealObserver.observe(el));
 
-    /* Lien actif dans le menu */
     const navLinks = $$('.nav-list .nav-link');
     const navObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -266,7 +263,7 @@
     const modalExt = $('#modal-ext-link');
 
     let lastFocused = null;
-    let galleryStep = null; // fonction de navigation si une galerie est ouverte
+    let galleryStep = null;
 
     const placeholderHTML = (title, text) => `
         <div class="modal-placeholder">
@@ -370,14 +367,13 @@
     function closeModal() {
         modal.classList.remove('open');
         document.body.classList.remove('modal-open');
-        mediaBox.innerHTML = ''; // coupe aussi la lecture vidéo
+        mediaBox.innerHTML = ''; 
         galleryStep = null;
         currentId = null;
         history.replaceState(null, '', location.pathname + location.search);
         if (lastFocused) lastFocused.focus();
     }
 
-    /* Navigation entre projets dans la modale + lien direct (#projet-01) */
     let currentId = null;
     const navBox = $('#modal-nav');
     const visibleIds = () => cards.filter((c) => !c.classList.contains('is-hidden')).map((c) => c.dataset.id);
@@ -413,7 +409,6 @@
     $('#modal-prev').addEventListener('click', () => stepProject(-1));
     $('#modal-next').addEventListener('click', () => stepProject(1));
 
-    /* Ouverture directe d'un projet via l'adresse (ex. monsite.fr/#projet-03) */
     const hashMatch = location.hash.match(/^#projet-(.+)$/);
     if (hashMatch) {
         const target = PROJECTS.find((p) => p.id === hashMatch[1]);
@@ -439,7 +434,6 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
     window.addEventListener('resize', () => { if (window.innerWidth >= 768) setMenu(false); });
 
-    /* La vidéo n'est chargée que sur grand écran (la voûte est masquée sur mobile) et sans "réduction des animations" */
     const heroVideo = $('#hero-video');
     if (heroVideo && window.innerWidth >= 1024 && !prefersReducedMotion) {
         heroVideo.addEventListener('loadeddata', () => heroVideo.classList.add('is-ready'));
@@ -448,7 +442,6 @@
     }
 
     /* ===== 8. FORMULAIRE ===== */
-    /* Tant que l'identifiant Formspree n'est pas renseigné dans index.html, on évite un envoi dans le vide */
     const form = $('#contact-form');
     const formStatus = $('#form-status');
 
@@ -456,7 +449,6 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Sécurité : Si l'ID n'est pas encore configuré dans index.html
             if (form.action.includes('VOTRE_ID_FORMSPREE_ICI')) {
                 formStatus.textContent = "Le formulaire n'est pas encore actif. Écris-moi directement par email !";
                 formStatus.style.color = '#f87171';
@@ -466,7 +458,6 @@
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn ? submitBtn.textContent : 'Envoyer';
 
-            // État pendant l'envoi
             if (submitBtn) {
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Envoi en cours...';
@@ -482,7 +473,7 @@
 
                 if (response.ok) {
                     formStatus.textContent = "Message envoyé avec succès ! Je te réponds au plus vite.";
-                    formStatus.style.color = '#4ade80'; // Vert
+                    formStatus.style.color = '#4ade80';
                     form.reset();
                 } else {
                     const data = await response.json();
@@ -491,7 +482,7 @@
                     } else {
                         formStatus.textContent = "Une erreur est survenue. Réessaie ou écris-moi par mail.";
                     }
-                    formStatus.style.color = '#f87171'; // Rouge
+                    formStatus.style.color = '#f87171';
                 }
             } catch (err) {
                 formStatus.textContent = "Erreur de connexion. Vérifie ta connexion et réessaie.";

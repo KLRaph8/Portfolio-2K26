@@ -5,23 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raphaël Klur | Réalisation, Image, Motion & VFX</title>
-    <meta name="description"
-        content="Portfolio de Raphaël Klur : Réalisation audiovisuelle, Cadrage, Lumière, Son, Montage, Motion Design et Photographie.">
+    <meta name="description" content="Portfolio de Raphaël Klur : Réalisation audiovisuelle, Cadrage, Lumière, Son, Montage, Motion Design et Photographie.">
 
-    <!-- Aperçu lors d'un partage (LinkedIn, messages...). À compléter une fois le site en ligne :
-         og:url et og:image doivent être des URL absolues (https://...). -->
+    <!-- Aperçu lors d'un partage (LinkedIn, messages...) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Raphaël Klur | Réalisation, Image, Motion & VFX">
     <meta property="og:description" content="Portfolio audiovisuel : réalisation, lumière, son, montage, motion design et VFX.">
-    <!-- <meta property="og:url" content="https://TON-SITE.fr/"> -->
-    <!-- <meta property="og:image" content="https://TON-SITE.fr/assets/images/og-image.jpg"> -->
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2309090b'/%3E%3Ctext x='50' y='64' font-size='40' font-weight='700' text-anchor='middle' fill='%23a78bfa' font-family='sans-serif'%3ER/K%3C/text%3E%3C/svg%3E">
 
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=rx-100@400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
@@ -65,11 +60,9 @@
                         <span class="line-mask js-line-reveal" style="--delay: 260ms;"><span class="line-inner"><span class="title-hover-group"><span class="hover-letter">C</span><span class="hover-letter">r</span><span class="hover-letter">é</span><span class="hover-letter">a</span><span class="hover-letter">t</span><span class="hover-letter">i</span><span class="hover-letter">o</span><span class="hover-letter">n</span><span class="hover-letter">.</span></span></span></span>
                     </h1>
 
-                    <!-- Le parallaxe est sur le conteneur extérieur, l'apparition sur .arch-reveal (deux effets séparés) -->
                     <div class="arch-wrapper" data-parallax="-0.14" aria-hidden="true">
                         <div class="arch-reveal js-reveal-box" style="--delay: 220ms;">
                             <div class="arch-box">
-                                <!-- Boucle muette facultative : dépose assets/video/hero-loop.mp4 (5 à 10 s). Sans fichier, le dégradé reste. -->
                                 <video id="hero-video" class="arch-video" data-src="assets/video/hero-loop.mp4" muted loop playsinline preload="none"></video>
                                 <div class="arch-grid" data-parallax="0.08"></div>
                             </div>
@@ -98,8 +91,7 @@
                             Spécialisé en réalisation audiovisuelle, motion design, photographie et effets visuels (VFX).
                         </p>
                         <p class="hero-sub">
-                            Du plateau de tournage (cadrage, lumière, prise de son) jusqu'à la post-production, je donne
-                            vie à des concepts visuels forts et immersifs.
+                            Du plateau de tournage (cadrage, lumière, prise de son) jusqu'à la post-production, je donne vie à des concepts visuels forts et immersifs.
                         </p>
                         <div class="btn-row">
                             <a href="#projets" class="btn-editorial"><span class="btn-editorial-dot"></span><span>Voir mes projets ↓</span></a>
@@ -177,7 +169,6 @@
         </section>
 
         <!-- ============ PROJETS ============ -->
-        <!-- Les filtres et les cartes sont générés par js/main.js à partir de js/projects-data.js -->
         <section id="projets" class="projects-section">
             <div class="container">
                 <div class="projects-header">
@@ -198,7 +189,7 @@
             </div>
         </section>
 
-        <!-- ============ MODALE (remplie par js/main.js) ============ -->
+        <!-- ============ MODALE ============ -->
         <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
             <div class="modal-window">
                 <button type="button" id="close-modal" class="modal-close" aria-label="Fermer">✕</button>
@@ -231,10 +222,12 @@
                     <span class="line-mask js-line-reveal" style="--delay: 120ms;"><span class="line-inner">Travaillons ensemble.</span></span>
                 </h2>
 
-                <!-- À FAIRE : remplacer VOTRE_ID_FORMSPREE_ICI par ton identifiant Formspree (formspree.io) -->
-                <form id="contact-form" action="https://formspree.io/f/xeaaebbg" method="POST"
-                <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
-                    class="contact-form js-reveal-up" style="--delay: 180ms;">
+                <!-- Formulaire corrigé -->
+                <form id="contact-form" action="https://formspree.io/f/xeaaebbg" method="POST" class="contact-form js-reveal-up" style="--delay: 180ms;">
+                    
+                    <!-- L'input de sécurité est maintenant bien À L'INTÉRIEUR du form et non dans sa balise d'ouverture -->
+                    <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
+                    
                     <div class="form-row">
                         <div>
                             <label for="name" class="form-label">Nom</label>
@@ -272,7 +265,6 @@
         </footer>
     </main>
 
-    <!-- Ordre important : les données d'abord, la logique ensuite -->
     <script src="js/projects-data.js"></script>
     <script src="js/main.js"></script>
 </body>
